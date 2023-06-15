@@ -8,15 +8,9 @@ import logo from './assets/logo.png'; // Import the logo image
 import Introduction from './Introduction';
 import Team from './Team';
 import About from './About';
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Container, Box, AppBar, Toolbar, TextField, Button } from '@material-ui/core';
-
-
-<>
-<Introduction/>
-<Team/>
-<About/>
-</>
+import { Provider } from 'react-redux';
+import store from './store';
+import { AppBar, Toolbar, Button } from '@material-ui/core';
 
 const HomePage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -36,7 +30,7 @@ const HomePage = () => {
       <div>
         <AppBar position="static">
           <Toolbar>
-          <Button onClick={toggleSidebar} style={{ color: 'white' }}>Open Sidebar</Button>
+            <Button onClick={toggleSidebar} style={{ color: 'white' }}>Open Sidebar</Button>
             <div style={{ flexGrow: 1 }}/>
             <img src={logo} alt="Logo" className="logo" /> 
           </Toolbar>
@@ -61,4 +55,12 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+const App = () => {
+  return (
+    <Provider store={store}>
+      <HomePage />
+    </Provider>
+  );
+};
+
+export default App;
